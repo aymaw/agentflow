@@ -131,10 +131,10 @@ class EngineTests(unittest.TestCase):
         self.engine.db.execute(
             "UPDATE steps SET status='running',attempts=1 WHERE run_id=? AND id='inspect'", (run,)
         )
-        second = Engine(self.path, self.tools)
-        self.addCleanup(second.close)
-        self.assertEqual(second.advance(run)["status"], "running")
-        self.assertEqual(second.snapshot(run)["steps"][0]["attempts"], 1)
+        # Close both controllers before tearDown removes the database on Windows.
+        with closing(Engine(self.path, self.tools)) as second:
+            self.assertEqual(second.advance(run)["status"], "running")
+            self.assertEqual(second.snapshot(run)["steps"][0]["attempts"], 1)
 
     def test_idempotent_tool_receipt_and_conflict(self):
         reserve = next(t for t in self.tools if t.name == "reserve")
