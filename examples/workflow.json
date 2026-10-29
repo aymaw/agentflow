@@ -1,0 +1,40 @@
+{
+  "steps": [
+    {
+      "id": "inspect",
+      "tool": "inventory",
+      "args": {
+        "sku": "sensor-kit"
+      },
+      "needs": []
+    },
+    {
+      "id": "price",
+      "tool": "quote",
+      "args": {
+        "sku": {
+          "$ref": "inspect.sku"
+        },
+        "quantity": 3
+      },
+      "needs": [
+        "inspect"
+      ]
+    },
+    {
+      "id": "hold",
+      "tool": "reserve",
+      "args": {
+        "sku": {
+          "$ref": "price.sku"
+        },
+        "quantity": {
+          "$ref": "price.quantity"
+        }
+      },
+      "needs": [
+        "price"
+      ]
+    }
+  ]
+}

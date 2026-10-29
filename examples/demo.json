@@ -1,0 +1,133 @@
+{
+  "project": "AgentFlow",
+  "mode": "deterministic-synthetic",
+  "checkpoint": "waiting_approval",
+  "final_status": "succeeded",
+  "replay_adds_events": 0,
+  "steps": [
+    {
+      "id": "inspect",
+      "status": "succeeded",
+      "attempts": 1,
+      "output": {
+        "available": 12,
+        "sku": "sensor-kit"
+      },
+      "fingerprint": "7f37c3b3cf7fdbb1c386dbe5fbcd6197012d54dbf8a508bd1a514ca57fb1987c",
+      "approval": null,
+      "error": null
+    },
+    {
+      "id": "price",
+      "status": "succeeded",
+      "attempts": 1,
+      "output": {
+        "currency": "USD",
+        "quantity": 3,
+        "sku": "sensor-kit",
+        "total_cents": 14700
+      },
+      "fingerprint": "67c45955f7043abdeaf02d42c40587d628bce3e0143bec6230cf6b9fb3a82036",
+      "approval": null,
+      "error": null
+    },
+    {
+      "id": "hold",
+      "status": "succeeded",
+      "attempts": 1,
+      "output": {
+        "quantity": 3,
+        "receipt": "demo-run:hold:665c1934013d81e06262631b9a53da47c971ae2d12fc0a68722c634f49812fc5",
+        "reserved": true,
+        "sku": "sensor-kit",
+        "synthetic": true
+      },
+      "fingerprint": "665c1934013d81e06262631b9a53da47c971ae2d12fc0a68722c634f49812fc5",
+      "approval": "665c1934013d81e06262631b9a53da47c971ae2d12fc0a68722c634f49812fc5",
+      "error": null
+    }
+  ],
+  "events": [
+    {
+      "seq": 1,
+      "step_id": "",
+      "kind": "created",
+      "detail": {
+        "plan_hash": "868c824a3083154b5744d9d331e89a2a6b839a35dad1bc6f5833beac45b84ff1"
+      }
+    },
+    {
+      "seq": 2,
+      "step_id": "inspect",
+      "kind": "started",
+      "detail": {
+        "attempt": 1
+      }
+    },
+    {
+      "seq": 3,
+      "step_id": "inspect",
+      "kind": "succeeded",
+      "detail": {
+        "attempt": 1,
+        "error": null
+      }
+    },
+    {
+      "seq": 4,
+      "step_id": "price",
+      "kind": "started",
+      "detail": {
+        "attempt": 1
+      }
+    },
+    {
+      "seq": 5,
+      "step_id": "price",
+      "kind": "succeeded",
+      "detail": {
+        "attempt": 1,
+        "error": null
+      }
+    },
+    {
+      "seq": 6,
+      "step_id": "hold",
+      "kind": "approval_requested",
+      "detail": {
+        "args": {
+          "quantity": 3,
+          "sku": "sensor-kit"
+        },
+        "fingerprint": "665c1934013d81e06262631b9a53da47c971ae2d12fc0a68722c634f49812fc5",
+        "tool": "reserve"
+      }
+    },
+    {
+      "seq": 7,
+      "step_id": "hold",
+      "kind": "approved",
+      "detail": {
+        "actor": "demo-reviewer",
+        "fingerprint": "665c1934013d81e06262631b9a53da47c971ae2d12fc0a68722c634f49812fc5"
+      }
+    },
+    {
+      "seq": 8,
+      "step_id": "hold",
+      "kind": "started",
+      "detail": {
+        "attempt": 1
+      }
+    },
+    {
+      "seq": 9,
+      "step_id": "hold",
+      "kind": "succeeded",
+      "detail": {
+        "attempt": 1,
+        "error": null
+      }
+    }
+  ]
+}
