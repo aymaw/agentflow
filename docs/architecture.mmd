@@ -1,0 +1,12 @@
+flowchart LR
+  G[Goal or JSON plan] --> P[Optional model planner]
+  P --> V[DAG validator]
+  G --> V
+  V --> S[(SQLite checkpoints)]
+  S --> R[Read tools]
+  R --> S
+  S --> A[Fingerprint review]
+  A --> W[Synthetic write tool]
+  W --> L[(Idempotent receipt ledger)]
+  W --> S
+  S --> E[Trace and run explorer]
